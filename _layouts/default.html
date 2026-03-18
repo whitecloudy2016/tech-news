@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div>
+        <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+        <div class="site-desc">{{ site.description }}</div>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>{{ site.title }} &middot; Powered by <a href="https://pages.github.com">GitHub Pages</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function getTheme() {
+      return localStorage.getItem('theme') || 'auto';
+    }
+    function applyTheme(t) {
+      if (t === 'auto') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+      document.getElementById('theme-icon').textContent =
+        (t === 'dark' || (t === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '☀️' : '🌙';
+    }
+    function toggleTheme() {
+      const current = getTheme();
+      const isDark = current === 'dark' || (current === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const next = isDark ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    }
+    applyTheme(getTheme());
+  </script>
+</body>
+</html>

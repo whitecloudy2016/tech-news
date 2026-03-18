@@ -1,0 +1,24 @@
+title: Tech News Daily
+description: 每日科技新闻与热门论文日报 · AI Infra 视角
+url: "https://whitecloudy2016.github.io"
+baseurl: "/tech-news"
+lang: zh-CN
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
